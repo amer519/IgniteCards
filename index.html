@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Charmander • Ultra Premium Fire Edition</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root {
+  --fire1:#ff8a00;
+  --fire2:#ff3c00;
+  --fire3:#ffdd55;
+  --bg1:#0b0200;
+  --bg2:#1a0500;
+  --text:#fefefe;
+  --soft:#f7d7b2;
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+
+html,body{
+  margin:0;padding:0;
+  background:radial-gradient(circle at top,var(--bg2),var(--bg1));
+  font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  color:var(--text);
+  overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+}
+
+body{
+  display:flex;
+  justify-content:center;
+  padding:20px;
+}
+
+/* Fire orbs */
+.orb{
+  position:fixed;
+  border-radius:50%;
+  filter:blur(60px);
+  opacity:.4;
+  pointer-events:none;
+  mix-blend-mode:screen;
+  animation:float 22s ease-in-out infinite alternate;
+}
+.orb1{width:420px;height:420px;background:rgba(255,80,0,.35);top:-80px;left:-60px;}
+.orb2{width:340px;height:340px;background:rgba(255,150,0,.30);bottom:-120px;right:-80px;animation-duration:28s;}
+.orb3{width:300px;height:300px;background:rgba(255,200,50,.18);bottom:10%;left:20%;animation-duration:30s;}
+
+@keyframes float{
+  0%{transform:translate3d(0,0,0);}
+  50%{transform:translate3d(40px,-30px,0);}
+  100%{transform:translate3d(-30px,40px,0);}
+}
+
+.frame{
+  width:100%;
+  max-width:440px;
+  z-index:10;
+}
+
+/* Header */
+.brand{
+  text-align:center;
+  margin-bottom:14px;
+}
+.brand span{
+  padding:6px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  letter-spacing:.12em;
+  font-size:.74rem;
+  border:1px solid rgba(255,255,255,.10);
+}
+
+.card{
+  background:rgba(0,0,0,.55);
+  border-radius:24px;
+  padding:18px;
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 15px 40px rgba(0,0,0,.7);
+}
+
+.inner{
+  background:rgba(0,0,0,.4);
+  border-radius:20px;
+  padding:18px;
+  border:1px solid rgba(255,255,255,.06);
+}
+
+/* Title */
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.title{
+  font-size:1.55rem;
+  font-weight:800;
+  display:flex;
+  gap:10px;
+  align-items:center;
+  color:var(--fire3);
+}
+
+.type{
+  padding:4px 10px;
+  border-radius:999px;
+  background:linear-gradient(135deg,var(--fire1),var(--fire2));
+  font-size:.75rem;
+  font-weight:700;
+  color:#3a1d00;
+}
+
+.subtitle{
+  font-size:.85rem;
+  color:var(--soft);
+}
+
+.tags{display:flex;gap:6px;margin-top:8px;}
+.tag{
+  padding:4px 8px;
+  background:rgba(255,255,255,.08);
+  border-radius:999px;
+  color:var(--soft);
+  font-size:.68rem;
+}
+
+/* Video Window */
+.video-wrap{
+  margin-top:16px;
+  position:relative;
+  overflow:hidden;
+  border-radius:18px;
+  background:#000;
+}
+
+/* Hard mask */
+.video-wrap video{
+  width:100%;
+  height:auto;
+  display:block;
+  clip-path:inset(4% 4% 4% 4% round 10px);
+  -webkit-clip-path:inset(4% 4% 4% 4% round 10px);
+}
+
+/* Fire frame */
+.fire-frame{
+  pointer-events:none;
+  position:absolute;
+  inset:0;
+  border-radius:14px;
+  border:4px solid var(--fire3);
+  box-shadow:
+    0 0 12px rgba(255,100,0,.55),
+    inset 0 0 14px rgba(255,80,0,.45);
+}
+
+/* Fire vignette */
+.fire-vignette{
+  pointer-events:none;
+  position:absolute;
+  inset:0;
+  border-radius:14px;
+  background:radial-gradient(circle,
+    rgba(0,0,0,0) 55%,
+    rgba(255,60,0,0.10) 78%,
+    rgba(0,0,0,0.32) 100%);
+}
+
+.hint{text-align:center;margin-top:10px;font-size:.72rem;letter-spacing:.18em;color:var(--soft);}
+.hint span{
+  width:8px;height:8px;display:inline-block;background:var(--fire3);
+  border-radius:50%;margin-right:6px;
+  box-shadow:0 0 12px var(--fire2);
+}
+
+/* Body */
+.body{
+  margin-top:18px;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:14px;
+}
+
+.pokedex-label{
+  font-size:.72rem;
+  color:var(--fire1);
+  letter-spacing:.14em;
+}
+
+.pokedex{
+  font-size:.9rem;
+  color:var(--soft);
+  line-height:1.6;
+}
+
+.meta{
+  font-size:.8rem;
+  color:var(--soft);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.meta-label{
+  font-size:.72rem;
+  color:var(--fire3);
+  letter-spacing:.12em;
+}
+
+.meta-card-id{
+  grid-column:1/-1;
+  border-top:1px dashed rgba(255,255,255,.15);
+  padding-top:8px;
+}
+
+.footer{
+  margin-top:16px;
+  text-align:center;
+  font-size:.76rem;
+  color:var(--soft);
+}
+.footer strong{color:var(--fire2);}
+</style>
+</head>
+
+<body>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<main class="frame">
+
+<div class="brand"><span>ULTRA PREMIUM FIRE EDITION</span></div>
+
+<div class="card">
+<div class="inner">
+
+<div class="header">
+  <div>
+    <div class="title">Charmander <span class="type">FIRE</span></div>
+    <div class="subtitle">Base Set • 1999 • Original Fire-Type Classic</div>
+  </div>
+  <div class="tags">
+    <div class="tag">Premium Display</div>
+    <div class="tag">Heat-Linked NFC Experience</div>
+    <div class="tag">Collector Upgrade</div>
+  </div>
+</div>
+
+<div class="video-wrap">
+  <video autoplay muted loop playsinline src="assets/charmander-live.mp4"></video>
+  <div class="fire-vignette"></div>
+  <div class="fire-frame"></div>
+</div>
+
+<div class="hint"><span></span>TAP TO IGNITE THE FLAME</div>
+
+<div class="body">
+  <div>
+    <div class="pokedex-label">POKÉDEX • NO.004</div>
+    <div class="pokedex">
+      Charmander’s flame glows brightest when its spirit burns strong.  
+      This Ultra Premium Fire Edition enhances the classic 1999 illustration with a living flame window designed for collectors who want something truly special.
+    </div>
+  </div>
+
+  <div class="meta">
+    <div><div class="meta-label">Print</div>Base Set (Common)</div>
+    <div><div class="meta-label">Condition</div>Premium Collector Condition</div>
+    <div><div class="meta-label">Artist</div>Mitsuhiro Arita</div>
+    <div class="meta-card-id">Digital Flame Companion: <strong>CHAR-1999-FIRE-ULTRA</strong></div>
+  </div>
+</div>
+
+<div class="footer"><strong>Collector Note:</strong> Keep this digital flame with the physical card for a complete premium experience.</div>
+
+</div>
+</div>
+
+</main>
+
+</body>
+</html>
