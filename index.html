@@ -226,8 +226,43 @@
       color:var(--soft);
     }
     .footer strong{color:var(--fire2);}
+
+    /* Serial Plate with Subtle Flame Animation */
+    .serial-plate {
+      margin-top:6px;
+      font-size:0.9rem;
+      letter-spacing:0.18em;
+      color:#ffdd55;
+      text-shadow:
+        0 0 4px rgba(255,150,50,0.4),
+        0 0 8px rgba(255,120,40,0.2);
+      animation: flameGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes flameGlow {
+      0% {
+        color:#ffdd55;
+        text-shadow:
+          0 0 4px rgba(255,150,50,0.4),
+          0 0 8px rgba(255,120,40,0.2);
+      }
+      50% {
+        color:#ffe58a;
+        text-shadow:
+          0 0 7px rgba(255,190,80,0.8),
+          0 0 14px rgba(255,140,50,0.5);
+      }
+      100% {
+        color:#ffdd55;
+        text-shadow:
+          0 0 4px rgba(255,150,50,0.4),
+          0 0 10px rgba(255,100,40,0.25);
+      }
+    }
+
   </style>
 </head>
+
 <body>
   <div class="orb orb1"></div>
   <div class="orb orb2"></div>
@@ -242,11 +277,13 @@
           <div>
             <div class="title">Charmander <span class="type">FIRE</span></div>
             <div class="subtitle">Base Set • 1999 • Original Fire-Type Classic</div>
+            <div id="serialPlate" class="serial-plate" style="display:none;"></div>
           </div>
+
           <div class="tags">
-            <div class="tag">Premium Display</div>
-            <div class="tag">Heat-Linked NFC Experience</div>
-            <div class="tag">Collector Upgrade</div>
+            <div class="tag">🔥 Ember-Linked Activation</div>
+            <div class="tag">🐾 Charmander Fire Sync</div>
+            <div class="tag">🛡 Certified Collector Issue</div>
           </div>
         </div>
 
@@ -267,6 +304,7 @@
               This Ultra Premium Edition enhances the classic 1999 artwork with a living fire window and a nostalgic soundtrack for a true collector moment.
             </div>
           </div>
+
           <div class="meta">
             <div>
               <div class="meta-label">Print</div>
@@ -287,13 +325,22 @@
         </div>
 
         <div class="footer">
-          <strong>Collector Note:</strong> Unmute the flame to relive the classic adventure.
+          <strong>Collector Note:</strong> Let the fire speak, unmute for the full experience. Tap the pokeball to play sound
         </div>
       </div>
     </div>
   </main>
 
   <script>
+    // Serial Number via URL (?id=###)
+    const params = new URLSearchParams(window.location.search);
+    const serial = params.get("id");
+    if(serial){
+      const plate=document.getElementById("serialPlate");
+      plate.textContent=`Edition ${serial} / 150`;
+      plate.style.display='block';
+    }
+
     const btn = document.getElementById('unmute');
     const vid = document.getElementById('vid');
     btn.addEventListener('click', () => {
@@ -302,5 +349,6 @@
       btn.style.display = 'none';
     });
   </script>
+
 </body>
 </html>
